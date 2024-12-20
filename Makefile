@@ -1,14 +1,16 @@
 CC = gcc
-CFLAGS = -Wall -g
+CFLAGS = -Wall -O2
 LIBS = -lssl -lcrypto
 
-TARGET = generate_public_key
-SRCS = generate_public_key.c
+TARGET = public_key
+SRC = public_key.c
 
-# Compile the program
-$(TARGET): $(SRCS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS) $(LIBS)
+# Build the target
+all: $(TARGET)
 
-# Clean the compiled files
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) $(SRC) -o $(TARGET) $(LIBS)
+
+# Clean the build
 clean:
 	rm -f $(TARGET)
