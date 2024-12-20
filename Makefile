@@ -1,16 +1,32 @@
 CC = gcc
-CFLAGS = -Wall -O2
+CFLAGS = -Wall
 LIBS = -lssl -lcrypto
 
-TARGET = public_key
-SRC = public_key.c
+# Target name
+TARGET = ripemd160_example
 
-# Build the target
+# Source file
+SRC = ripemd160_example.c
+
+# Object file
+OBJ = ripemd160_example.o
+
+# Default target
 all: $(TARGET)
 
-$(TARGET): $(SRC)
-	$(CC) $(CFLAGS) $(SRC) -o $(TARGET) $(LIBS)
+# Link the object file to create the executable
+$(TARGET): $(OBJ)
+	$(CC) $(OBJ) -o $(TARGET) $(LIBS)
 
-# Clean the build
+# Compile source to object
+$(OBJ): $(SRC)
+	$(CC) $(CFLAGS) -c $(SRC)
+
+# Clean up build artifacts
 clean:
-	rm -f $(TARGET)
+	rm -f $(OBJ) $(TARGET)
+
+# Run the program
+run: $(TARGET)
+	./$(TARGET)
+
